@@ -2,9 +2,15 @@ package com.emanuelef.remote_capture.model;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+
+import com.emanuelef.remote_capture.activities.Database;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class CaptureSettings implements Serializable {
     public Prefs.DumpMode dump_mode;
@@ -95,4 +101,5 @@ public class CaptureSettings implements Serializable {
             return Boolean.parseBoolean(s);
         return bundle.getBoolean(key, def_value);
     }
+
 }

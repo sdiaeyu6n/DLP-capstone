@@ -46,7 +46,7 @@ import java.util.List;
 
 public class AppsStatsAdapter extends RecyclerView.Adapter<AppsStatsAdapter.ViewHolder> {
     private static final String TAG = "AppsStatsAdapter";
-    private final Context mContext;
+    private static Context mContext;
     private final LayoutInflater mLayoutInflater;
     private final Drawable mUnknownIcon;
     private final Blocklist mBlocklist;

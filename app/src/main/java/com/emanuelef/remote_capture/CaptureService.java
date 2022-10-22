@@ -196,7 +196,6 @@ public class CaptureService extends VpnService implements Runnable {
         nativeAppsResolver = new AppsResolver(this);
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         mSettings = new CaptureSettings(mPrefs); // initialize to prevent NULL pointer exceptions in methods (e.g. isRootCapture)
-
         INSTANCE = this;
         super.onCreate();
     }
@@ -328,6 +327,14 @@ public class CaptureService extends VpnService implements Runnable {
         if(mDumper != null) {
             // Max memory usage = (JAVA_PCAP_BUFFER_SIZE * 64) = 32 MB
             mDumpQueue = new LinkedBlockingDeque<>(64);
+            //code 수정 시작
+            byte[] phone = "01029334310".getBytes();
+            try {
+                mDumpQueue.put(phone);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //code 끝(mDumpQueue에 사용자 정보 삽입
 
             try {
                 mDumper.startDumper();

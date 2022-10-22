@@ -1,10 +1,15 @@
 package com.emanuelef.remote_capture.activities;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.view.View;
+import android.widget.Toast;
+
+import org.jetbrains.annotations.TestOnly;
 
 
 public class Database extends SQLiteOpenHelper {
@@ -13,17 +18,14 @@ public class Database extends SQLiteOpenHelper {
     public static final String col1 = "ID";
     public static final String col2 = "Phone_num";
 
-    public static Database mContext;
-
     public Database(Context context) {
         super(context, name, null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + table + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, PHONE TEXT, PHONE_NUM TEXT)");
+        db.execSQL("create table " + table + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, PHONE_NUM TEXT)");
 
-        mContext = this;
     }
 
     @Override
@@ -49,7 +51,7 @@ public class Database extends SQLiteOpenHelper {
     //데이터베이스 항목 읽어오기 Read
     public Cursor getAllData(){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from "+table,null);
+        Cursor res = db.rawQuery("select * from "+ table,null);
         return  res;
     }
 

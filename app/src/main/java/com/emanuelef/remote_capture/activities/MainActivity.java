@@ -105,8 +105,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private NavigationView mNavView;
     private CaptureHelper mCapHelper;
     private boolean usingMediaStore;
-    private String PhoneNum;
     private static final String TAG = "Main";
+    public static Context mainContext;
 
     private static final int POS_STATUS = 0;
     private static final int POS_CONNECTIONS = 1;
@@ -137,7 +137,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
-
+        mainContext = this;
         setContentView(R.layout.main_activity);
         setTitle("PCAPdroid");
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -692,7 +692,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             appStateRunning();
     }
 
-    private void doStartCaptureService() {
+    private void doStartCaptureService() { //캡처 실행부
         appStateStarting();
         mCapHelper.startCapture(new CaptureSettings(mPrefs));
     }

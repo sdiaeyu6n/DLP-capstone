@@ -1,7 +1,9 @@
 package com.emanuelef.remote_capture.activities;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.emanuelef.remote_capture.R;
 
 public class Input_Num extends AppCompatActivity {
+    public static Context mContext;
     Database db;
     Button button;
     EditText editText;
@@ -25,10 +28,10 @@ public class Input_Num extends AppCompatActivity {
         button = (Button) findViewById(R.id.PhoneNum_Button);
         editText = (EditText) findViewById(R.id.editPhoneNum);
         db = new Database(this);
-
+//        editText.addTextChangedListener(new PhoneNumberFormattingTextWatcher()); //하이픈 자동추가
         AddData();
         viewAll();
-
+        mContext = this;
         if(viewAll() == true){
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
@@ -44,7 +47,10 @@ public class Input_Num extends AppCompatActivity {
                 if (editText.length() != 11) {
                     Toast.makeText(getApplicationContext(), "전화번호를 정확히 입력해주세요.", Toast.LENGTH_SHORT);
                 } else {
-                    boolean isInserted = db.insertData(editText.getText().toString());
+                    String pp = editText.getText().toString();
+                    String ppp;
+                    ppp = pp.substring(0, 3) + "--" + pp.substring(3, 7) + "--" + pp.substring(7, 11);
+                    boolean isInserted = db.insertData(ppp);
                     if (isInserted == true) {
                         Toast.makeText(Input_Num.this, "데이터추가 성공", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
