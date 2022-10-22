@@ -208,20 +208,21 @@ public class CaptureService extends VpnService implements Runnable {
 
     @Override
     public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
+        //1. 시작버튼 누르면 발생하는 메소드
         mStopping = false;
 
-        // startForeground must always be called since the Service is being started with
+        // "startForeground 메소드"는 서비스가 시작되기 때문에 항상 호출되어야 합니다.
         // ContextCompat.startForegroundService.
-        // NOTE: since Android 12, startForeground cannot be called when the app is in background
-        // (unless invoked via an Intent).
+        // Android 12부터 앱이 백그라운드에 있을 때 startForeground를 호출할 수 없습니다.
+        // (인텐트를 통해 호출되지 않는 한
         setupNotifications();
         startForeground(NOTIFY_ID_VPNSERVICE, getStatusNotification());
 
-        // NOTE: onStartCommand may be called when the capture is already running, e.g. if the user
-        // turns on the always-on VPN while the capture is running in root mode
+        // 참고: 캡처가 이미 실행 중일 때 onStartCommand가 호출될 수 있습니다. 만약 사용자가
+        // 캡처가 루트 모드에서 실행되는 동안 상시 연결 VPN을 켭니다.
         if(mCaptureThread != null) {
-            // Restarting the capture requires calling stopAndJoinThreads, which is blocking.
-            // Choosing not to support this right now.
+            // 캡처를 다시 시작하려면 차단 중인 stopAndJoinThreads를 호출해야 합니다.
+            // 지금은 지원하지 않기로 선택합니다.
             Log.e(TAG, "Restarting the capture is not supported");
             return abortStart();
         }
@@ -231,8 +232,8 @@ public class CaptureService extends VpnService implements Runnable {
 
         Log.d(CaptureService.TAG, "onStartCommand");
 
-        // NOTE: a null intent may be delivered due to START_STICKY
-        // It can be simulated by starting the capture, putting PCAPdroid in the background and then running:
+        // 참고: START_STICKY로 인해 null 의도가 전달될 수 있습니다.
+        // 캡처를 시작하고 PCAPdroid를 백그라운드에 넣은 다음 다음을 실행하여 시뮬레이션할 수 있습니다.
         //  adb shell ps | grep remote_capture | awk '{print $2}' | xargs adb shell run-as com.emanuelef.remote_capture.debug kill
         CaptureSettings settings = ((intent == null) ? null : Utils.getSerializableExtra(intent, "settings", CaptureSettings.class));
         if(settings == null) {
