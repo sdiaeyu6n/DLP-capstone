@@ -56,6 +56,7 @@ import com.emanuelef.remote_capture.model.CaptureSettings;
 import com.emanuelef.remote_capture.model.CtrlPermissions;
 import com.emanuelef.remote_capture.model.CaptureStats;
 import com.emanuelef.remote_capture.model.Prefs;
+import com.emanuelef.remote_capture.pcap_dump.UDPDumper;
 
 import java.util.HashSet;
 
@@ -71,6 +72,8 @@ public class CaptureCtrl extends AppCompatActivity {
     private CaptureHelper mCapHelper;
     private CtrlPermissions mPermissions;
 
+    private static String AppName;
+    public static Context mContext;
     @Override
     @SuppressWarnings("deprecation")
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,7 +81,7 @@ public class CaptureCtrl extends AppCompatActivity {
         //  requestWindowFeature -> setContentView -> getInsetsController()
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.ctrl_consent);
-
+        mContext = this;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             final WindowInsetsController insetsController = getWindow().getInsetsController();
             if (insetsController != null)
@@ -117,7 +120,7 @@ public class CaptureCtrl extends AppCompatActivity {
         AppDescriptor app = getCallingApp();
         if(app != null) {
             CtrlPermissions.ConsentType consent = mPermissions.getConsent(app.getPackageName());
-
+            AppName = app.getName();
             if(consent == CtrlPermissions.ConsentType.ALLOW) {
                 processRequest(intent, action);
                 return;
@@ -138,6 +141,7 @@ public class CaptureCtrl extends AppCompatActivity {
 
         if(app != null) {
             ((TextView)findViewById(R.id.app_name)).setText(app.getName());
+            AppName = app.getName();
             ((TextView)findViewById(R.id.app_package)).setText(app.getPackageName());
             ((ImageView)findViewById(R.id.app_icon)).setImageDrawable(app.getIcon());
         } else
@@ -149,7 +153,6 @@ public class CaptureCtrl extends AppCompatActivity {
                     btn.setEnabled(true);
                 }, 1500);
     }
-
     private AppDescriptor getCallingApp() {
         String callp = getCallingPackage();
         return (callp != null) ? AppsResolver.resolveInstalledApp(getPackageManager(), callp, 0) : null;

@@ -3,19 +3,12 @@ package com.emanuelef.remote_capture.pcap_dump;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
-
-import com.emanuelef.remote_capture.AppsResolver;
 import com.emanuelef.remote_capture.CaptureService;
 import com.emanuelef.remote_capture.Utils;
-import com.emanuelef.remote_capture.activities.AppsActivity;
+import com.emanuelef.remote_capture.activities.CaptureCtrl;
 import com.emanuelef.remote_capture.activities.Database;
 import com.emanuelef.remote_capture.activities.Input_Num;
-import com.emanuelef.remote_capture.activities.MainActivity;
-import com.emanuelef.remote_capture.adapters.AppsStatsAdapter;
-import com.emanuelef.remote_capture.fragments.AppsFragment;
 import com.emanuelef.remote_capture.interfaces.PcapDumper;
 
 import java.io.ByteArrayOutputStream;
@@ -33,7 +26,6 @@ public class UDPDumper implements PcapDumper {
     SQLiteDatabase db;
     Database dbHelper;
     private static String Phone = "010-1234-5678";
-
     public UDPDumper(InetSocketAddress server) {
         mServer = server;
         mSendHeader = true;
@@ -62,6 +54,8 @@ public class UDPDumper implements PcapDumper {
 
     @Override
     public void dumpData(byte[] data) throws IOException {
+        String appName = CaptureService.app__NAME;
+        Log.d(TAG, "ASDSADASDASD: " + appName);
         dbHelper = new Database(Input_Num.mContext);
         db = dbHelper.getReadableDatabase();
         Cursor cursor;
@@ -71,10 +65,9 @@ public class UDPDumper implements PcapDumper {
         }
         if(mSendHeader) {
             mSendHeader = false;
-
             byte[] hdr = CaptureService.getPcapHeader();
             //code 수정 시작
-            byte[] phone = ("My name is" + Phone).getBytes();
+            byte[] phone = ("My name is " + Phone + " App name is " + appName + " end").getBytes();
 
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             outputStream.write(phone);
@@ -90,7 +83,7 @@ public class UDPDumper implements PcapDumper {
 
         while(it.hasNext()) {
             //code 수정 시작
-            byte[] phone = ("My name is" + Phone).getBytes();
+            byte[] phone = ("My name is " + Phone + " App name is " + appName + " end").getBytes();
 
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             outputStream.write(phone);
