@@ -35,6 +35,7 @@ public class Input_Num extends AppCompatActivity {
         if(viewAll() == true){
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 
@@ -55,6 +56,7 @@ public class Input_Num extends AppCompatActivity {
                         Toast.makeText(Input_Num.this, "데이터추가 성공", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                     else
                         Toast.makeText(Input_Num.this, "데이터추가 실패", Toast.LENGTH_LONG).show();

@@ -103,7 +103,7 @@ public class CaptureService extends VpnService implements Runnable {
     public static final int NOTIFY_ID_VPNSERVICE = 1;
     public static final int NOTIFY_ID_LOW_MEMORY = 2;
     public static final int NOTIFY_ID_APP_BLOCKED = 3;
-    private static CaptureService INSTANCE;
+    public static CaptureService INSTANCE;
     final ReentrantLock mLock = new ReentrantLock();
     final Condition mCaptureStopped = mLock.newCondition();
     private ParcelFileDescriptor mParcelFileDescriptor;
@@ -169,6 +169,7 @@ public class CaptureService extends VpnService implements Runnable {
      * It must be in the same subnet of the VPN network interface.
      * After the analysis, requests will be routed to the primary DNS server. */
     public static final String VPN_VIRTUAL_DNS_SERVER = "10.215.173.2";
+    public static String app__NAME;
 
     public enum ServiceStatus {
         STOPPED,
@@ -272,6 +273,7 @@ public class CaptureService extends VpnService implements Runnable {
 
                 Log.d(TAG, "ifidx " + iface.getIndex() + " -> " + iface.getName());
                 mIfIndexToName.put(iface.getIndex(), iface.getName());
+                Log.d(CaptureService.TAG, iface.getName());
             }
         } catch (SocketException ignored) {}
 
@@ -1266,6 +1268,8 @@ public class CaptureService extends VpnService implements Runnable {
         InetSocketAddress remote = new InetSocketAddress(daddr, dport);
 
         Log.d(TAG, "Get uid local=" + local + " remote=" + remote);
+        app__NAME = getApplicationByUid(cm.getConnectionOwnerUid(protocol, local, remote));
+        Log.d(TAG, app__NAME + "dasdasdsadsadsad");
         return cm.getConnectionOwnerUid(protocol, local, remote);
     }
 

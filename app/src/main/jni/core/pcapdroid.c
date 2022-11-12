@@ -196,7 +196,7 @@ char* get_appname_by_uid(pcapdroid_t *pd, int uid, char *buf, int bufsize) {
         buf[bufsize-1] = '\0';
     } else
         buf[0] = '\0';
-
+    log_d(buf);
     return buf;
 }
 
