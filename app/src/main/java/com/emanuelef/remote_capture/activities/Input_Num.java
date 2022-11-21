@@ -38,8 +38,7 @@ public class Input_Num extends AppCompatActivity {
             finish();
         }
     }
-
-    //데이터베이스 추가하기
+    
     //데이터베이스 추가하기
     public void AddData(){
         button.setOnClickListener(new View.OnClickListener() {

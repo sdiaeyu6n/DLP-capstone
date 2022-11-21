@@ -62,6 +62,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -141,6 +142,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         setContentView(R.layout.main_activity);
         setTitle("PCAPdroid");
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        Button getInfo = findViewById(R.id.Getinfo);
+
+        getInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Get_Info.class);
+                startActivity(intent);
+            }
+        });
 
         int appver = Prefs.getAppVersion(mPrefs);
         if (appver <= 0) {
