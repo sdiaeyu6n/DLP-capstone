@@ -109,6 +109,7 @@ public class ConnectionsAdapter extends RecyclerView.Adapter<ConnectionsAdapter.
 
         @SuppressWarnings("deprecation")
         public void bindConn(Context context, ConnectionDescriptor conn, AppsResolver apps, Drawable unknownIcon) {
+            //이 부분이 커넥션 리스트를 띄워주는 부분입니덩.
             AppDescriptor app = apps.getAppByUid(conn.uid, 0);
             Drawable appIcon;
             String l7Text;

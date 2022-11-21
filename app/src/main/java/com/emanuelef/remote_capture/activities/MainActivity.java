@@ -420,6 +420,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 case POS_STATUS:
                     return new StatusFragment();
                 case POS_CONNECTIONS:
+                    //여기에 API 추가?
                     return new ConnectionsFragment();
             }
         }

@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class UDPDumper implements PcapDumper {
@@ -55,7 +56,6 @@ public class UDPDumper implements PcapDumper {
     @Override
     public void dumpData(byte[] data) throws IOException {
         String appName = CaptureService.app__NAME;
-        Log.d(TAG, "ASDSADASDASD: " + appName);
         dbHelper = new Database(Input_Num.mContext);
         db = dbHelper.getReadableDatabase();
         Cursor cursor;
@@ -67,7 +67,8 @@ public class UDPDumper implements PcapDumper {
             mSendHeader = false;
             byte[] hdr = CaptureService.getPcapHeader();
             //code 수정 시작
-            byte[] phone = ("My name is " + Phone + " App name is " + appName + " end").getBytes();
+
+            byte[] phone = ("My name is " + Phone + " App name is &&"+ appName +"&&").getBytes();
 
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             outputStream.write(phone);
@@ -83,7 +84,7 @@ public class UDPDumper implements PcapDumper {
 
         while(it.hasNext()) {
             //code 수정 시작
-            byte[] phone = ("My name is " + Phone + " App name is " + appName + " end").getBytes();
+            byte[] phone = ("My name is " + Phone + " App name is &&"+ appName +"&&").getBytes();
 
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             outputStream.write(phone);
