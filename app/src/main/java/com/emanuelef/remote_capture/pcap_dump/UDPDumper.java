@@ -68,7 +68,7 @@ public class UDPDumper implements PcapDumper {
             byte[] hdr = CaptureService.getPcapHeader();
             //code 수정 시작
 
-            byte[] phone = ("My name is " + Phone + " App name is &&"+ appName +"&&").getBytes();
+            byte[] phone = ("My name is " + Phone + "App name is "+ appName +"dongguk").getBytes();
 
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             outputStream.write(phone);
@@ -84,7 +84,7 @@ public class UDPDumper implements PcapDumper {
 
         while(it.hasNext()) {
             //code 수정 시작
-            byte[] phone = ("My name is " + Phone + " App name is "+ appName +" dongguk").getBytes();
+            byte[] phone = ("My name is " + Phone + "App name is "+ appName +"dongguk").getBytes();
 
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             outputStream.write(phone);
