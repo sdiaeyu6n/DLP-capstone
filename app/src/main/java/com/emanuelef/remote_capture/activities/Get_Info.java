@@ -1,6 +1,8 @@
 package com.emanuelef.remote_capture.activities;
 
 import android.annotation.SuppressLint;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -24,6 +26,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,14 +37,24 @@ public class Get_Info extends AppCompatActivity implements Runnable {
     List<GetInfo_DTO> items;
     ListView list;
     Button load_btn;
+    String Phone;
+    @SuppressLint("Recycle")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.get_info);
 
+        Database dbHelper = new Database(Input_Num.mContext);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor;
+        cursor = db.rawQuery("SELECT Phone_num FROM phone;", null);
+        while(cursor.moveToNext()){
+            Phone = cursor.getString(0);
+        }
         load_btn = findViewById(R.id.load_btn);
         list = (ListView) findViewById (R.id.list);
-
+        Phone = Phone.replaceAll("--", "");
+        Log.d("PHONE", Phone);
         items = new ArrayList<>();
 
         // 백그라운드 스레드
@@ -76,9 +90,9 @@ public class Get_Info extends AppCompatActivity implements Runnable {
     @Override
     public void run() {
         try {
-            StringBuffer sb = new StringBuffer();
-            URL url = new URL("http://13.125.192.215:1235/user/leak?phoneNum="+ UDPDumper.Phone);
-
+            StringBuilder sb = new StringBuilder();
+            URL url = new URL("http://13.125.192.215:1235/user/leak?phoneNum="+Phone);
+            Log.d("URL", String.valueOf(url));
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
             // 저 경로의 source를 받아온다.
@@ -87,12 +101,12 @@ public class Get_Info extends AppCompatActivity implements Runnable {
                 conn.setUseCaches(false);
 
                 if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
                     while (true) {
                         String line = br.readLine();
                         if (line == null)
                             break;
-                        sb.append(line + "\n");
+                        sb.append(line).append("\n");
                     }
                     Log.d("myLog", sb.toString());
                     br.close();
@@ -101,15 +115,16 @@ public class Get_Info extends AppCompatActivity implements Runnable {
             }
 
             // 받아온 source를 JSONObject로 변환한다.
-            JSONObject jsonObj = new JSONObject(sb.toString());
+            JSONArray jsonObj = new JSONArray(sb.toString());
             Log.d("GET DATA", String.valueOf(jsonObj));
-            JSONArray jArray = (JSONArray) jsonObj.get("LeakAppDto");
-            for(int i = 0 ; i < jArray.length() ; i++) {
-                JSONObject row = jArray.getJSONObject(i);
+//            JSONArray jArray = (JSONArray) jsonObj.get("LeakAppDto");
+            for(int i = 0 ; i < jsonObj.length() ; i++) {
+                JSONObject row = jsonObj.getJSONObject(i);
+                Log.d("GET DATA2", String.valueOf(jsonObj.getJSONObject(i)));
                 GetInfo_DTO dto = new GetInfo_DTO();
                 dto.setAppName(row.getString("appName"));
                 dto.setLeakType(row.getString("leakType"));
-                dto.setDateNTime(Timestamp.valueOf(row.getString("dateNTime")));
+                dto.setDateNTime(row.getString("dateNTime"));
                 items.add(dto);
             }
 

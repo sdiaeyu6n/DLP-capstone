@@ -1,10 +1,10 @@
 package com.emanuelef.remote_capture.model;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class GetInfo_DTO {
     private String appName;
-    private Timestamp dateNTime;
+    private String dateNTime;
     private String leakType;
 
     public String getAppName() {
@@ -15,11 +15,11 @@ public class GetInfo_DTO {
         this.appName = appName;
     }
 
-    public Timestamp getDateNTime() {
+    public String getDateNTime() {
         return dateNTime;
     }
 
-    public void setDateNTime(Timestamp dateNTime) {
+    public void setDateNTime(String dateNTime) {
         this.dateNTime = dateNTime;
     }
 
