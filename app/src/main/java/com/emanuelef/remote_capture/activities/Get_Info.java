@@ -77,7 +77,7 @@ public class Get_Info extends AppCompatActivity implements Runnable {
             String[] str =new String[items.size()];
             for(int i=0; i<str.length; i++){
                 GetInfo_DTO dto =items.get(i);
-                str[i]=(i+1)+". "+ dto.getAppName()+"\n [ " + dto.getLeakType()+" ] " + "\n [ " + dto.getDateNTime() + " ] " ;
+                str[i]=(i+1)+" 유출경로 : "+ dto.getAppName()+"\n   유출정보 : " + dto.getLeakType() + "\n   유출일자 : " + dto.getDateNTime();
             }
 
             // 안드로이드가 미리 만들어놓은 simple_list_item_1 레이아웃으로 어댑터 생성(텍스트뷰 하나로 구성)
@@ -124,7 +124,7 @@ public class Get_Info extends AppCompatActivity implements Runnable {
                 GetInfo_DTO dto = new GetInfo_DTO();
                 dto.setAppName(row.getString("appName"));
                 dto.setLeakType(row.getString("leakType"));
-                dto.setDateNTime(row.getString("dateNTime"));
+                dto.setDateNTime(row.getString("dateNTime").substring(0,10));
                 items.add(dto);
             }
 
