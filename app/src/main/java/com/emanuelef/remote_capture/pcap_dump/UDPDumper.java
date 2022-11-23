@@ -26,7 +26,7 @@ public class UDPDumper implements PcapDumper {
     private DatagramSocket mSocket;
     SQLiteDatabase db;
     Database dbHelper;
-    private static String Phone = "010-1234-5678";
+    public static String Phone = "010-1234-5678";
     public UDPDumper(InetSocketAddress server) {
         mServer = server;
         mSendHeader = true;
