@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
@@ -92,7 +93,7 @@ public class Get_Info extends AppCompatActivity implements Runnable {
     public void run() {
         try {
             StringBuilder sb = new StringBuilder();
-            URL url = new URL("http://13.125.192.215:1235/user/leak?phoneNum="+Phone);
+            URL url = new URL("http://49.50.160.26:1235/user/leak?phoneNum="+Phone);
             Log.d("URL", String.valueOf(url));
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 

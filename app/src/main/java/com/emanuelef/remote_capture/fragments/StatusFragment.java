@@ -256,6 +256,7 @@ public class StatusFragment extends Fragment implements AppStateListener, MenuPr
         mCaptureStatus.setText(Utils.formatBytes(stats.bytes_sent + stats.bytes_rcvd));
     }
 
+    @SuppressLint("StringFormatInvalid")
     private void refreshPcapDumpInfo() {
         String info = "";
 

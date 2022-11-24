@@ -62,12 +62,14 @@
             android:orientation="vertical"
             android:layout_marginTop="35dp"
             android:padding="10dp"
+            android:visibility="invisible"
             app:layout_constraintTop_toBottomOf="@id/status_view"
             app:layout_constraintStart_toStartOf="parent">
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/dump_mode_spinner"
                 android:layout_width="match_parent"
+                android:visibility="invisible"
                 android:layout_height="wrap_content"
                 android:spinnerMode="dialog"
                 tools:listitem="@layout/quick_settings_item"
@@ -75,17 +77,27 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
+                android:visibility="invisible"
                 android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:visibility="invisible"
+                    android:layout_height="match_parent">
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <include
                     android:id="@+id/app_filter_text"
                     layout="@layout/quick_settings_item"
+                    android:visibility="invisible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="50dp" />
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/app_filter_switch"
+                    android:visibility="invisible"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true" />
@@ -93,6 +105,7 @@
                 <TextView
                     android:id="@+id/app_filter_warning"
                     android:layout_width="wrap_content"
+                    android:visibility="invisible"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/app_filter_text"
                     android:paddingHorizontal="10dp"
