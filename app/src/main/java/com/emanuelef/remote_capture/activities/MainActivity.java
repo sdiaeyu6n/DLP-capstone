@@ -140,7 +140,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
         mainContext = this;
         setContentView(R.layout.main_activity);
-        setTitle("PCAPdroid");
+        setTitle("Packet Security Lab");
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         Button getInfo = findViewById(R.id.Getinfo);

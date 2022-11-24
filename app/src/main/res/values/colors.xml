@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorTab">#7A5EBC</color>
+    <color name="colorTab">#0668FB</color>
     <color name="colorTabText">@android:color/tertiary_text_light</color>
     <color name="colorTabTextSelected">@android:color/secondary_text_light</color>
-    <color name="colorPrimary">#512da8</color>
-    <color name="colorPrimaryDark">#4D3294</color>
-    <color name="colorActionBar">#512da8</color>
+    <color name="colorPrimary">#4C8FF5</color>
+    <color name="colorPrimaryDark">#478FF9</color>
+    <color name="colorActionBar">#1C72F4</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorAccentLight">#D8ADBD</color>
     <color name="colorBackgroundGray">#2C000000</color>
