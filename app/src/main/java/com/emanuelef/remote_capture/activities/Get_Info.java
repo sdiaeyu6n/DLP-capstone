@@ -62,6 +62,7 @@ public class Get_Info extends AppCompatActivity implements Runnable {
             @Override
             public void onClick(View v) {
                 Thread th = new Thread(Get_Info.this);
+                items.clear();
                 th.start();
             }
         });
