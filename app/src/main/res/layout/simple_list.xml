@@ -18,5 +18,5 @@
         android:textStyle="italic"
         android:textSize="15sp"
         android:text="@string/list_is_empty">
-    </TextView>
+    </TextView>ㅋ
 </RelativeLayout>
