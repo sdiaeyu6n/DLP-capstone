@@ -55,6 +55,12 @@
             android:exported="true">
         </activity>
         <activity
+            android:name=".activities.NotTraceInfo"
+            android:launchMode="singleTop"
+            android:usesCleartextTraffic="true"
+            android:exported="true">
+        </activity>
+        <activity
             android:name=".activities.Get_Info"
             android:launchMode="singleTop"
             android:usesCleartextTraffic="true"

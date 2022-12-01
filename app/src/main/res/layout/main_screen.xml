@@ -52,12 +52,47 @@
             android:id="@+id/adContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <Button
+                android:id="@+id/NotTraceInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="추적 조건"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <Button
+                android:id="@+id/TraceApp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="추적 앱"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
             <Button
                 android:id="@+id/Getinfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="유출 내역 보기" />
+        </LinearLayout>
+
+
+
+        </LinearLayout>
+
         </FrameLayout>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
