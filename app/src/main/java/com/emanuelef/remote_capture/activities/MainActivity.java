@@ -147,6 +147,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         Button notTraceInfo = findViewById(R.id.NotTraceInfo);
         Button traceApp = findViewById(R.id.TraceApp);
 
+        traceApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AppList.class);
+                startActivity(intent);
+            }
+        });
+
         notTraceInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
