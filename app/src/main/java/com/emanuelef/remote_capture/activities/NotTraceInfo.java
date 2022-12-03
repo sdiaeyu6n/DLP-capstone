@@ -118,9 +118,11 @@ public class NotTraceInfo extends AppCompatActivity implements Runnable{
 
             if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 Log.d("TAG", "HTTP OK 성공");
+                conn.disconnect();
             }
             else {
                 Log.d("TAG", "HTTP OK 안됨");
+                conn.disconnect();
             }
         } catch (IOException e) {
             e.printStackTrace();
