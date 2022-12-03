@@ -81,7 +81,6 @@ public class Get_Info extends AppCompatActivity implements Runnable {
                 GetInfo_DTO dto =items.get(i);
                 str[i]=(i+1)+" 유출경로 : "+ dto.getAppName()+"\n   유출정보 : " + dto.getLeakType() + "\n   유출일자 : " + dto.getDateNTime();
             }
-
             // 안드로이드가 미리 만들어놓은 simple_list_item_1 레이아웃으로 어댑터 생성(텍스트뷰 하나로 구성)
             ArrayAdapter<String> adapter=new ArrayAdapter<String>(Get_Info.this, android.R.layout.simple_list_item_1, str);
             list.setAdapter(adapter);

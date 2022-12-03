@@ -11,6 +11,7 @@
 
     <TextView
         android:id="@+id/list_empty"
+        android:textColor="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
@@ -18,5 +19,5 @@
         android:textStyle="italic"
         android:textSize="15sp"
         android:text="@string/list_is_empty">
-    </TextView>ㅋ
+    </TextView>
 </RelativeLayout>
