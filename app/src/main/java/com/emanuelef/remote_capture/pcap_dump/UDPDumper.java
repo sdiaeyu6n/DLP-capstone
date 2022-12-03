@@ -103,30 +103,30 @@ public class UDPDumper implements PcapDumper {
             byte[] phone = ("My name is " + Phone + "App name is "+ appName +"dongguk").getBytes();
 
             //암호화
-            String secretKey = "Secret";
-            String fSalt = "tJHnN5b1i6wvXMwzYMRk";
+//            String secretKey = "Secret";
+//            String fSalt = "tJHnN5b1i6wvXMwzYMRk";
 
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             outputStream.write(phone);
             outputStream.write(data);
 
-            String plain = outputStream.toString();
-            String cipherText="";
-            String dcrCipherText="";
-            try {
-                cipherText = encrypt(secretKey, fSalt, plain);
-                dcrCipherText = decrypt(secretKey, fSalt, cipherText);
-            } catch (Exception e) {
-                System.out.println("암호화실패");
-            }
+            byte[] result = outputStream.toByteArray();
+//            String plain = outputStream.toString();
+//            String cipherText="";
+//            String dcrCipherText="";
+//            try {
+//                cipherText = encrypt(secretKey, fSalt, plain);
+//                dcrCipherText = decrypt(secretKey, fSalt, cipherText);
+//            } catch (Exception e) {
+//                System.out.println("암호화실패");
+//            }
 
-            byte[] result = cipherText.getBytes(StandardCharsets.UTF_8);
-            try {
-                System.out.println(pos+ "암호화==복호화:"+ plain.equals(dcrCipherText));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+//            byte[] result = cipherText.getBytes(StandardCharsets.UTF_8);
+//            try {
+//                System.out.println(pos+ "암호화==복호화:"+ plain.equals(dcrCipherText));
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
             //끝 (아래의 result를 data로 다시 바꿔줘야함)
             int rec_len = it.next();
             sendDatagram(result, pos, rec_len);
