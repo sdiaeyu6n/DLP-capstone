@@ -12,7 +12,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
@@ -31,11 +33,12 @@ public class AppList extends AppCompatActivity {
     private ArrayList<String> Apps_lebels = null;
     private ListView list_apps;
     AppListAdapter adapter;
+    public static ArrayList<String> Checked_Lebles = new ArrayList<String>();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_list);
-
+        Button finish = (Button)findViewById(R.id.finish);
         list_apps = (ListView) findViewById(R.id.list_apps);
         adapter = new AppListAdapter();
 
@@ -43,6 +46,17 @@ public class AppList extends AppCompatActivity {
 
         list_apps.setAdapter(adapter);
 
+        finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("FIN", String.valueOf(Checked_Lebles));
+                Checked_Lebles.clear();
+
+//                여기에 API 전송하는 부분 만들기
+
+                finish();
+            }
+        });
     }
 
     private void getPackageList() {

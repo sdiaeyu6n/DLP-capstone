@@ -1,5 +1,7 @@
 package com.emanuelef.remote_capture.adapters;
 
+import static com.emanuelef.remote_capture.activities.AppList.Checked_Lebles;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,16 +55,23 @@ public class AppListAdapter extends BaseAdapter {
         TextView appuid = convertView.findViewById(R.id.appuid);
         CheckBox checkBox = convertView.findViewById(R.id.check_apps);
         checkBox.setChecked(items.get(position).Checked);
+        applebel.setText(listItem.getAppLebel());
+        appuid.setText(listItem.getAppUid());
         checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean newState = !items.get(position).isChecked();
-                items.get(position).Checked = newState;
+                if (items.get(position).isChecked()){
+                    Checked_Lebles.remove(listItem.getAppLebel());
+                }
+                else {
+                    boolean newState = !items.get(position).isChecked();
+                    items.get(position).Checked = newState;
+                    Checked_Lebles.add(listItem.getAppLebel());
+                }
             }
         });
         checkBox.setChecked(isChecked(position));
-        applebel.setText(listItem.getAppLebel());
-        appuid.setText(listItem.getAppUid());
+
 
         return convertView;
     }
