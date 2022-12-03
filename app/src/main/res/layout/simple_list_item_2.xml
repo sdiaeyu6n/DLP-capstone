@@ -18,14 +18,20 @@
             android:layout_weight="1">
             <TextView
                 android:id="@+id/applebel"
+                android:textColor="@android:color/white"
                 android:layout_width="match_parent"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 style="@style/TextAppearance.AppCompat.Large"
                 android:layout_weight="5"/>
 
             <TextView
                 android:id="@+id/appuid"
+                android:textColor="@android:color/white"
                 android:layout_width="match_parent"
+                android:textSize="14sp"
+                android:textStyle="italic"
                 android:layout_height="wrap_content"
                 style="@style/TextAppearance.AppCompat.Large"
                 android:layout_weight="5"/>
